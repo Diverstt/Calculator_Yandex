@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 services:
   orchestrator:
     build:
@@ -22,3 +23,29 @@ services:
     environment:
       - COMPUTING_POWER=4
       - ORCHESTRATOR_URL=http://orchestrator:8080
+=======
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: ./cmd/orchestrator/Dockerfile
+    container_name: calc_orchestrator
+    ports:
+      - "8080:8080"
+    environment:
+      - TIME_ADDITION_MS=2000
+      - TIME_SUBTRACTION_MS=2000
+      - TIME_MULTIPLICATIONS_MS=3000
+      - TIME_DIVISIONS_MS=4000
+
+  agent:
+    build:
+      context: .
+      dockerfile: ./cmd/agent/Dockerfile
+    container_name: calc_agent
+    depends_on:
+      - orchestrator
+    environment:
+      - COMPUTING_POWER=4
+      - ORCHESTRATOR_URL=http://orchestrator:8080
+>>>>>>> 90ed988564e5d44cf8d62646ddf13796a701a9aa
